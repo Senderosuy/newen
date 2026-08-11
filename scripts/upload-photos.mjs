@@ -117,6 +117,7 @@ async function main() {
   const token = await login();
   console.log(`Sesión OK. Subiendo ${MAPPINGS.length} fotos al bucket "${BUCKET}"...`);
 
+
   let ok = 0;
   for (const [local, remote] of MAPPINGS) {
     try {
@@ -125,6 +126,10 @@ async function main() {
       console.log(`  ✓ ${remote}`);
     } catch (err) {
       console.error(`  ✗ ${err.message}`);
+      if (err.message.includes("NoSuchBucket")) {
+        console.error('\nEl bucket "site-photos" no existe todavía. Pedile a Lovable que ejecute la migración 20260811230000_site_photos_bucket.sql y volvé a correr este script.');
+        process.exit(1);
+      }
     }
   }
   console.log(`\nListo: ${ok}/${MAPPINGS.length} fotos subidas.`);
