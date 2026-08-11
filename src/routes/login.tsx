@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import logoDark from "@/assets/logo-dark.asset.json";
+import logoLight from "@/assets/logo-light.asset.json";
 
 // Solo estos emails pueden crear la cuenta admin la primera vez (no hay registro público).
 const ALLOWED_ADMIN_EMAILS = ["cristian+newen@senderosgroup.com", "cristian@senderosgroup.com"];
@@ -80,7 +80,7 @@ function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-secondary/30 px-6">
       <div className="w-full max-w-md bg-card border border-border rounded-3xl shadow-xl p-8">
         <div className="flex justify-center mb-8">
-          <img src={logoDark.url} alt="NEWEN" className="h-12 w-auto object-contain" />
+          <img src={logoLight.url} alt="NEWEN" className="h-12 w-auto object-contain" />
         </div>
         <h1 className="text-2xl font-bold text-center mb-2">Panel de Administración</h1>
         <p className="text-muted-foreground text-sm text-center mb-8">

@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router"
 import { Mail, Phone } from "lucide-react"
 import type { SiteSettings } from "@/types"
-import logoLight from "@/assets/logo-light.asset.json";
+import logoDark from "@/assets/logo-dark.asset.json";
 
 export function Footer({ settings }: { settings: SiteSettings | null }) {
   return (
@@ -10,7 +10,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
         <div className="space-y-6">
           <Link to="/" className="inline-block">
             <img 
-              src={logoLight.url} 
+              src={logoDark.url}
               alt="NEWEN" 
               className="h-12 w-auto object-contain"
             />
