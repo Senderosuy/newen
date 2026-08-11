@@ -16,8 +16,8 @@ import { join } from "node:path";
 const SUPABASE_URL = process.env.SUPABASE_URL || "https://mknhcciovwphpzeeetjt.supabase.co";
 const SUPABASE_KEY =
   process.env.SUPABASE_KEY || process.env.VITE_SUPABASE_PUBLISHABLE_KEY || readEnvKey();
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "cristian+newen@senderosgroup.com";
+let ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 const PHOTOS_DIR = process.env.PHOTOS_DIR || "../fotos camionetas";
 const BUCKET = "site-photos";
 
@@ -92,9 +92,20 @@ async function upload(token, localPath, bucketPath) {
   }
 }
 
+async function ask(question) {
+  const { createInterface } = await import("node:readline/promises");
+  const rl = createInterface({ input: process.stdin, output: process.stdout });
+  const answer = await rl.question(question);
+  rl.close();
+  return answer.trim();
+}
+
 async function main() {
-  if (!ADMIN_EMAIL || !ADMIN_PASSWORD) {
-    console.error("Falta ADMIN_EMAIL o ADMIN_PASSWORD en las variables de entorno.");
+  if (!ADMIN_PASSWORD) {
+    ADMIN_PASSWORD = await ask(`Contraseña del admin (${ADMIN_EMAIL}): `);
+  }
+  if (!ADMIN_PASSWORD) {
+    console.error("Se necesita la contraseña para continuar.");
     process.exit(1);
   }
   if (!SUPABASE_KEY) {
