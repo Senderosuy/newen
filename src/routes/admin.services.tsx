@@ -48,7 +48,10 @@ function AdminServices() {
     if (target < 0 || target >= services.length) return;
     setBusy(true);
     try {
-      await swapOrder("services", services[index], services[target]);
+      const serviceA = services[index];
+      const serviceB = services[target];
+      if (!serviceA || !serviceB) return;
+      await swapOrder("services", serviceA, serviceB);
       await load();
     } catch (err: any) {
       toast.error(err.message);

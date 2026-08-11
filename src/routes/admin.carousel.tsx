@@ -95,7 +95,10 @@ function AdminCarousel() {
     if (target < 0 || target >= slides.length) return;
     setBusy(true);
     try {
-      await swapOrder("carousel_slides", slides[index], slides[target]);
+      const slideA = slides[index];
+      const slideB = slides[target];
+      if (!slideA || !slideB) return;
+      await swapOrder("carousel_slides", slideA, slideB);
       await load();
     } catch (err: any) {
       toast.error(err.message);
