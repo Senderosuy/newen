@@ -14,7 +14,156 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      blog_posts: {
+        Row: {
+          content: string
+          cover_url: string | null
+          created_at: string | null
+          excerpt: string | null
+          id: string
+          published_at: string | null
+          slug: string
+          status: string
+          title: string
+        }
+        Insert: {
+          content: string
+          cover_url?: string | null
+          created_at?: string | null
+          excerpt?: string | null
+          id?: string
+          published_at?: string | null
+          slug: string
+          status?: string
+          title: string
+        }
+        Update: {
+          content?: string
+          cover_url?: string | null
+          created_at?: string | null
+          excerpt?: string | null
+          id?: string
+          published_at?: string | null
+          slug?: string
+          status?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      carousel_slides: {
+        Row: {
+          created_at: string | null
+          id: string
+          image_url: string
+          sort_order: number | null
+          subtitle: string
+          title: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          image_url: string
+          sort_order?: number | null
+          subtitle: string
+          title: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          image_url?: string
+          sort_order?: number | null
+          subtitle?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      fleet: {
+        Row: {
+          capacity: number
+          description: string | null
+          features: Json
+          id: string
+          images: string[]
+          name: string
+          sort_order: number | null
+        }
+        Insert: {
+          capacity: number
+          description?: string | null
+          features?: Json
+          id?: string
+          images?: string[]
+          name: string
+          sort_order?: number | null
+        }
+        Update: {
+          capacity?: number
+          description?: string | null
+          features?: Json
+          id?: string
+          images?: string[]
+          name?: string
+          sort_order?: number | null
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          description: string
+          icon: string
+          id: string
+          sort_order: number | null
+          title: string
+        }
+        Insert: {
+          description: string
+          icon: string
+          id?: string
+          sort_order?: number | null
+          title: string
+        }
+        Update: {
+          description?: string
+          icon?: string
+          id?: string
+          sort_order?: number | null
+          title?: string
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          coverage_area: string | null
+          created_at: string | null
+          email: string | null
+          facebook: string | null
+          id: string
+          instagram: string | null
+          phone: string | null
+          whatsapp_number: string | null
+        }
+        Insert: {
+          coverage_area?: string | null
+          created_at?: string | null
+          email?: string | null
+          facebook?: string | null
+          id?: string
+          instagram?: string | null
+          phone?: string | null
+          whatsapp_number?: string | null
+        }
+        Update: {
+          coverage_area?: string | null
+          created_at?: string | null
+          email?: string | null
+          facebook?: string | null
+          id?: string
+          instagram?: string | null
+          phone?: string | null
+          whatsapp_number?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
