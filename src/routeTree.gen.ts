@@ -10,11 +10,24 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminCarouselRouteImport } from './routes/admin.carousel'
+import { Route as AdminBlogRouteImport } from './routes/admin.blog'
+import { Route as AdminServicesRouteImport } from './routes/admin.services'
+import { Route as AdminFleetRouteImport } from './routes/admin.fleet'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -22,31 +35,121 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCarouselRoute = AdminCarouselRouteImport.update({
+  id: '/carousel',
+  path: '/carousel',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminBlogRoute = AdminBlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminServicesRoute = AdminServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminFleetRoute = AdminFleetRouteImport.update({
+  id: '/fleet',
+  path: '/fleet',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/login': typeof LoginRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/admin/': typeof AdminIndexRoute
+  '/admin/carousel': typeof AdminCarouselRoute
+  '/admin/blog': typeof AdminBlogRoute
+  '/admin/services': typeof AdminServicesRoute
+  '/admin/fleet': typeof AdminFleetRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/login': typeof LoginRoute
+  '/admin': typeof AdminIndexRoute
+  '/admin/carousel': typeof AdminCarouselRoute
+  '/admin/blog': typeof AdminBlogRoute
+  '/admin/services': typeof AdminServicesRoute
+  '/admin/fleet': typeof AdminFleetRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/login': typeof LoginRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/admin/': typeof AdminIndexRoute
+  '/admin/carousel': typeof AdminCarouselRoute
+  '/admin/blog': typeof AdminBlogRoute
+  '/admin/services': typeof AdminServicesRoute
+  '/admin/fleet': typeof AdminFleetRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/admin'
+    | '/admin/'
+    | '/admin/carousel'
+    | '/admin/blog'
+    | '/admin/services'
+    | '/admin/fleet'
+    | '/admin/settings'
+    | '/blog/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin'
-  id: '__root__' | '/' | '/admin'
+  to:
+    | '/'
+    | '/login'
+    | '/admin'
+    | '/admin/carousel'
+    | '/admin/blog'
+    | '/admin/services'
+    | '/admin/fleet'
+    | '/admin/settings'
+    | '/blog/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/login'
+    | '/admin'
+    | '/admin/'
+    | '/admin/carousel'
+    | '/admin/blog'
+    | '/admin/services'
+    | '/admin/fleet'
+    | '/admin/settings'
+    | '/blog/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
+  LoginRoute: typeof LoginRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  BlogSlugRoute: typeof BlogSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +161,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin': {
       id: '/admin'
       path: '/admin'
@@ -65,12 +175,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRouteImport
+    }
+    '/admin/carousel': {
+      id: '/admin/carousel'
+      path: '/carousel'
+      fullPath: '/admin/carousel'
+      preLoaderRoute: typeof AdminCarouselRouteImport
+      parentRoute: typeof AdminRouteImport
+    }
+    '/admin/blog': {
+      id: '/admin/blog'
+      path: '/blog'
+      fullPath: '/admin/blog'
+      preLoaderRoute: typeof AdminBlogRouteImport
+      parentRoute: typeof AdminRouteImport
+    }
+    '/admin/services': {
+      id: '/admin/services'
+      path: '/services'
+      fullPath: '/admin/services'
+      preLoaderRoute: typeof AdminServicesRouteImport
+      parentRoute: typeof AdminRouteImport
+    }
+    '/admin/fleet': {
+      id: '/admin/fleet'
+      path: '/fleet'
+      fullPath: '/admin/fleet'
+      preLoaderRoute: typeof AdminFleetRouteImport
+      parentRoute: typeof AdminRouteImport
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminIndexRoute: typeof AdminIndexRoute
+  AdminCarouselRoute: typeof AdminCarouselRoute
+  AdminBlogRoute: typeof AdminBlogRoute
+  AdminServicesRoute: typeof AdminServicesRoute
+  AdminFleetRoute: typeof AdminFleetRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+}
+
+const adminRouteChildren: AdminRouteChildren = {
+  AdminIndexRoute: AdminIndexRoute,
+  AdminCarouselRoute: AdminCarouselRoute,
+  AdminBlogRoute: AdminBlogRoute,
+  AdminServicesRoute: AdminServicesRoute,
+  AdminFleetRoute: AdminFleetRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(adminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
+  LoginRoute: LoginRoute,
+  AdminRoute: AdminRouteWithChildren,
+  BlogSlugRoute: BlogSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

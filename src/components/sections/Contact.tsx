@@ -10,7 +10,7 @@ export function Contact({ settings }: { settings: SiteSettings | null }) {
   const [formData, setFormData] = useState({
     nombre: "",
     telefono: "",
-    servicio: "Turismo",
+    servicio: "Turismo y Larga Distancia",
     origen: "",
     destino: "",
     fecha: "",
@@ -107,10 +107,10 @@ Comentarios: ${formData.comentarios}`
                   value={formData.servicio}
                   onChange={(e) => setFormData({...formData, servicio: e.target.value})}
                 >
-                  <option>Turismo</option>
-                  <option>Ejecutivo</option>
-                  <option>Social</option>
-                  <option>Chárter</option>
+                  <option>Turismo y Larga Distancia</option>
+                  <option>Transfers Ejecutivos</option>
+                  <option>Eventos Sociales</option>
+                  <option>Servicios Chárter</option>
                 </select>
                 <Input 
                   type="date"

@@ -41,6 +41,18 @@ export const getBlogPosts = async () => {
   return data;
 };
 
+export const getBlogPostBySlug = async (slug: string) => {
+  const { data, error } = await supabase
+    .from("blog_posts")
+    .select("*")
+    .eq("slug", slug)
+    .eq("status", "published")
+    .maybeSingle();
+
+  if (error) throw error;
+  return data;
+};
+
 export const getSiteSettings = async () => {
   const { data, error } = await supabase
     .from("site_settings")
