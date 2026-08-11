@@ -1,13 +1,20 @@
 import { Link } from "@tanstack/react-router"
 import { Mail, Phone } from "lucide-react"
 import type { SiteSettings } from "@/types"
+import logoLight from "@/assets/logo-light.asset.json";
 
 export function Footer({ settings }: { settings: SiteSettings | null }) {
   return (
     <footer className="bg-primary text-white py-16 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
         <div className="space-y-6">
-          <Link to="/" className="text-3xl font-bold tracking-tighter">NEWEN</Link>
+          <Link to="/" className="inline-block">
+            <img 
+              src={logoLight.url} 
+              alt="NEWEN" 
+              className="h-12 w-auto object-contain"
+            />
+          </Link>
           <p className="text-white/80 text-sm leading-relaxed">
             Transporte de pasajeros premium en Uruguay. Viajes ejecutivos, turismo y eventos sociales con el mejor servicio del mercado.
           </p>
