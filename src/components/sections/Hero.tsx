@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
 import { getCarouselSlides } from "@/lib/queries"
 import type { CarouselSlide } from "@/types"
+import { CAROUSEL_DATA } from "@/lib/carousel-data"
 
 export function Hero() {
   const [slides, setSlides] = useState<CarouselSlide[]>([])
@@ -17,15 +18,7 @@ export function Hero() {
       .catch((err) => {
         console.error(err)
         // Fallback slides
-        setSlides([
-          {
-            id: '1',
-            title: 'Viajá cómodo, viajá seguro',
-            subtitle: 'Transporte ejecutivo y turismo en toda la región',
-            image_url: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80',
-            sort_order: 1
-          }
-        ])
+        setSlides(CAROUSEL_DATA.map((s, i) => ({ ...s, id: String(i + 1) })))
       })
   }, [])
 
