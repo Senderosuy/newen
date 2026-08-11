@@ -17,8 +17,8 @@ export const Route = createFileRoute("/")({
     title: "NEWEN - Transporte de Pasajeros y Turismo en Uruguay",
     meta: [
       { name: "description", content: "NEWEN ofrece traslados ejecutivos, turismo, eventos sociales y chárter en minibuses de última generación en Uruguay." },
-      { property: "og:title", content: "NEWEN - Transporte de Pasajeros" },
-      { property: "og:description", content: "Viajá cómodo, viajá seguro con NEWEN. Minibuses premium para turismo y traslados ejecutivos." },
+      { property: "og:title", content: "NEWEN - Transporte de Pasajeros y Turismo" },
+      { property: "og:description", content: "NEWEN ofrece traslados ejecutivos, turismo, eventos sociales y chárter en minibuses de última generación en Uruguay." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
