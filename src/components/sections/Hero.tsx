@@ -10,17 +10,30 @@ import { CAROUSEL_DATA } from "@/lib/carousel-data"
 
 export function Hero() {
   const [slides, setSlides] = useState<CarouselSlide[]>([])
-  const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000 })])
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000, stopOnInteraction: false })])
 
   useEffect(() => {
-    getCarouselSlides()
-      .then(setSlides)
-      .catch((err) => {
-        console.error(err)
-        // Fallback slides
+    async function loadSlides() {
+      try {
+        const data = await getCarouselSlides()
+        if (data && data.length > 0) {
+          setSlides(data)
+        } else {
+          setSlides(CAROUSEL_DATA.map((s, i) => ({ ...s, id: String(i + 1) })))
+        }
+      } catch (err) {
+        console.error("Error loading carousel slides:", err)
         setSlides(CAROUSEL_DATA.map((s, i) => ({ ...s, id: String(i + 1) })))
-      })
+      }
+    }
+    loadSlides()
   }, [])
+
+  useEffect(() => {
+    if (emblaApi) {
+      emblaApi.reInit()
+    }
+  }, [slides, emblaApi])
 
   return (
     <section id="inicio" className="relative h-screen w-full overflow-hidden">
