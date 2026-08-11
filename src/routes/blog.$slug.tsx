@@ -9,6 +9,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { Skeleton } from "@/components/ui/skeleton";
+import { RenderMarkdown } from "@/lib/markdown";
 
 export const Route = createFileRoute("/blog/$slug")({
   component: BlogPostPage,
@@ -76,8 +77,8 @@ function BlogPostPage() {
                   className="w-full aspect-video object-cover rounded-2xl mb-10 shadow-lg"
                 />
               )}
-              <div className="prose-lg text-foreground/90 leading-relaxed whitespace-pre-line">
-                {post.content}
+              <div className="text-lg text-foreground/90">
+                <RenderMarkdown content={post.content} />
               </div>
             </>
           )}

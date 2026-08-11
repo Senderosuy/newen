@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { RichTextEditor } from "@/components/admin/RichTextEditor";
 import { toast } from "sonner";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
@@ -189,11 +190,10 @@ function AdminBlog() {
           </div>
           <div className="space-y-2">
             <Label>Contenido</Label>
-            <Textarea
+            <RichTextEditor
               value={form.content}
-              onChange={(e) => setForm({ ...form, content: e.target.value })}
-              className="min-h-[300px]"
-              required
+              onChange={(content) => setForm({ ...form, content })}
+              placeholder="Escribí el artículo acá. Usá la barra de arriba para dar formato: negrita, subtítulos, listas y enlaces."
             />
           </div>
           <div className="flex gap-2">
