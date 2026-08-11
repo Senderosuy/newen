@@ -17,8 +17,13 @@ export async function uploadImage(file: File, folder: string): Promise<string> {
     .upload(path, file, { upsert: true, contentType: file.type });
   if (error) throw error;
 
-  const { data } = supabase.storage.from(PHOTOS_BUCKET).getPublicUrl(path);
-  return data.publicUrl;
+  // El bucket es privado (restricción del proyecto), así que generamos una URL
+  // firmada de muy larga duración (~100 años) que funciona públicamente.
+  const { data, error: signError } = await supabase.storage
+    .from(PHOTOS_BUCKET)
+    .createSignedUrl(path, 3153600000);
+  if (signError || !data?.signedUrl) throw signError ?? new Error("No se pudo generar la URL");
+  return data.signedUrl;
 }
 
 /** Intercambia el sort_order de dos filas (para reordenar). */
