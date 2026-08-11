@@ -65,7 +65,7 @@ Comentarios: ${formData.comentarios}`
                 </div>
                 <div>
                   <h4 className="font-bold text-lg">Email</h4>
-                  <p className="text-muted-foreground">{settings?.email || "contacto@newen.com.uy"}</p>
+                  <p className="text-muted-foreground">{settings?.email || "newentours@gmail.com"}</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">

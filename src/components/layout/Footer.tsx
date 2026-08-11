@@ -34,7 +34,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
           <h4 className="font-bold text-lg mb-6">Contacto</h4>
           <ul className="space-y-4 text-white/80 text-sm">
             <li className="flex items-center gap-2"><Phone size={16} /> {settings?.phone || "+598 99 738 955"}</li>
-            <li className="flex items-center gap-2"><Mail size={16} /> {settings?.email || "contacto@newen.com.uy"}</li>
+            <li className="flex items-center gap-2"><Mail size={16} /> {settings?.email || "newentours@gmail.com"}</li>
             <li className="flex items-center gap-2 text-white/80"><span className="font-semibold">Web:</span> newen.com.uy</li>
           </ul>
         </div>
