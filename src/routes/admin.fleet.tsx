@@ -102,7 +102,10 @@ function AdminFleet() {
     setBusy(true);
     try {
       const images = [...vehicle.images];
-      [images[index], images[target]] = [images[target], images[index]];
+      const imgA = images[index];
+      const imgB = images[target];
+      if (imgA === undefined || imgB === undefined) return;
+      [images[index], images[target]] = [imgB, imgA];
       await saveImages(vehicle.id, images);
     } catch (err: any) {
       toast.error(err.message);
@@ -116,7 +119,10 @@ function AdminFleet() {
     if (target < 0 || target >= fleet.length) return;
     setBusy(true);
     try {
-      await swapOrder("fleet", fleet[index], fleet[target]);
+      const vehicleA = fleet[index];
+      const vehicleB = fleet[target];
+      if (!vehicleA || !vehicleB) return;
+      await swapOrder("fleet", vehicleA, vehicleB);
       await load();
     } catch (err: any) {
       toast.error(err.message);
