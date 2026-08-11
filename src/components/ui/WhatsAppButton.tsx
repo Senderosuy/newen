@@ -10,7 +10,7 @@ export function WhatsAppButton({ phoneNumber }: WhatsAppButtonProps) {
   
   return (
     <motion.a
-      href={`https://wa.me/${formattedNumber}`}
+      href={`https://wa.me/${formattedNumber}?text=${encodeURIComponent("Hola NEWEN! Estoy viendo tu web newen.com.uy y me gustaría cotizar un servicio.")}`}
       target="_blank"
       rel="noopener noreferrer"
       initial={{ scale: 0, opacity: 0 }}

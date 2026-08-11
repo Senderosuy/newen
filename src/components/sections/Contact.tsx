@@ -20,7 +20,7 @@ export function Contact({ settings }: { settings: SiteSettings | null }) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const message = `Hola NEWEN! Quiero cotizar un viaje.
+    const message = `Hola NEWEN! Estoy viendo tu web newen.com.uy y me gustaría cotizar un viaje:
 Nombre: ${formData.nombre}
 Teléfono: ${formData.telefono}
 Servicio: ${formData.servicio}
