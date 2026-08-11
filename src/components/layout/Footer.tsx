@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router"
-import { Instagram, Facebook, Mail, Phone } from "lucide-react"
+import { Mail, Phone } from "lucide-react"
 import type { SiteSettings } from "@/types"
 
 export function Footer({ settings }: { settings: SiteSettings | null }) {
@@ -28,7 +28,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
           <ul className="space-y-4 text-white/80 text-sm">
             <li className="flex items-center gap-2"><Phone size={16} /> {settings?.phone || "+598 99 738 955"}</li>
             <li className="flex items-center gap-2"><Mail size={16} /> {settings?.email || "contacto@newen.com.uy"}</li>
-            <li className="flex items-center gap-2"><Instagram size={16} /> {settings?.instagram || "@newen.uy"}</li>
+            <li className="flex items-center gap-2"><Mail size={16} /> {settings?.email || "contacto@newen.com.uy"}</li>
           </ul>
         </div>
 

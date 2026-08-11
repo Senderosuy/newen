@@ -65,7 +65,7 @@ export function Fleet() {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {vehicle.features.map((feature) => (
+                  {Array.isArray(vehicle.features) && vehicle.features.map((feature: string) => (
                     <div key={feature} className="flex items-start gap-2">
                       <CheckCircle2 size={18} className="text-primary shrink-0 mt-1" />
                       <span className="text-sm">{feature}</span>
