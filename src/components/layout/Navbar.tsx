@@ -50,7 +50,12 @@ export function Navbar() {
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+              className={cn(
+                "text-sm font-medium transition-colors",
+                isScrolled
+                  ? "text-foreground/80 hover:text-primary"
+                  : "text-white/90 hover:text-white drop-shadow-sm"
+              )}
             >
               {link.name}
             </a>
@@ -64,7 +69,7 @@ export function Navbar() {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-foreground"
+          className={cn("md:hidden", isScrolled ? "text-foreground" : "text-white")}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
