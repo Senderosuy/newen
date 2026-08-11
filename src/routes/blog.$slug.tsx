@@ -35,7 +35,7 @@ function BlogPostPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Navbar solid />
       <main className="pt-28 pb-24 px-6">
         <article className="max-w-3xl mx-auto">
           <Link

@@ -6,24 +6,28 @@ import { Button } from "@/components/ui/button";
 import logoLight from "@/assets/logo-light.asset.json";
 import logoDark from "@/assets/logo-dark.asset.json";
 
-export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
+export function Navbar({ solid = false }: { solid?: boolean }) {
+  const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // En páginas sin hero oscuro (ej: blog), el navbar siempre va sólido.
+  const isScrolled = solid || scrolled;
+
+  // Con "/#ancla" los links funcionan también desde otras páginas (ej: /blog/...)
   const navLinks = [
-    { name: "Inicio", href: "#inicio" },
-    { name: "Servicios", href: "#servicios" },
-    { name: "Flota", href: "#flota" },
-    { name: "Blog", href: "#blog" },
-    { name: "Contacto", href: "#contacto" },
+    { name: "Inicio", href: "/#inicio" },
+    { name: "Servicios", href: "/#servicios" },
+    { name: "Flota", href: "/#flota" },
+    { name: "Blog", href: "/#blog" },
+    { name: "Contacto", href: "/#contacto" },
   ];
 
   return (
