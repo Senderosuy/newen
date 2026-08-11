@@ -3,7 +3,7 @@ export interface CarouselSlide {
   image_url: string;
   title: string;
   subtitle: string;
-  sort_order: number;
+  sort_order: number | null;
 }
 
 export interface Service {
@@ -11,17 +11,17 @@ export interface Service {
   icon: string;
   title: string;
   description: string;
-  sort_order: number;
+  sort_order: number | null;
 }
 
 export interface FleetVehicle {
   id: string;
   name: string;
   capacity: number;
-  features: string[];
+  features: any; // Using any for JSONB
   images: string[];
   description: string | null;
-  sort_order: number;
+  sort_order: number | null;
 }
 
 export interface BlogPost {
@@ -32,12 +32,12 @@ export interface BlogPost {
   content: string;
   excerpt: string | null;
   published_at: string | null;
-  status: 'draft' | 'published';
+  status: string;
 }
 
 export interface SiteSettings {
   id: string;
-  whatsapp_number: string;
+  whatsapp_number: string | null;
   phone: string | null;
   email: string | null;
   instagram: string | null;
