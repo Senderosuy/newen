@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { Menu, X, MessageSquare } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import logoLight from "@/assets/logo-light.asset.json";
+import logoDark from "@/assets/logo-dark.asset.json";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,8 +36,12 @@ export function Navbar() {
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link to="/" className="text-2xl font-bold tracking-tighter text-foreground">
-          NEWEN
+        <Link to="/" className="flex items-center gap-2">
+          <img 
+            src={isScrolled ? logoDark.url : logoLight.url} 
+            alt="NEWEN" 
+            className="h-10 w-auto object-contain transition-all duration-300"
+          />
         </Link>
 
         {/* Desktop Menu */}
