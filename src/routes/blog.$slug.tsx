@@ -13,25 +13,50 @@ import { RenderMarkdown } from "@/lib/markdown";
 
 export const Route = createFileRoute("/blog/$slug")({
   component: BlogPostPage,
+  loader: async ({ params }) => {
+    const post = await getBlogPostBySlug(params.slug);
+    return { post };
+  },
+  head: ({ loaderData }) => {
+    const post = loaderData?.post;
+    if (!post) {
+      return {
+        title: "Publicación no encontrada — NEWEN",
+      };
+    }
+    return {
+      title: `${post.title} — NEWEN`,
+      meta: [
+        { name: "description", content: post.excerpt || post.title },
+        { property: "og:title", content: post.title },
+        { property: "og:description", content: post.excerpt || post.title },
+        { property: "og:image", content: post.cover_url || "https://newen.com.uy/og-image.jpg" },
+        { property: "og:type", content: "article" },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+      links: [
+        { rel: "canonical", href: `https://newen.com.uy/blog/${post.slug}` }
+      ]
+    };
+  },
 });
 
 function BlogPostPage() {
+  const { post: initialPost } = Route.useLoaderData();
   const { slug } = Route.useParams();
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [notFound, setNotFound] = useState(false);
+  const [post, setPost] = useState<BlogPost | null>(initialPost);
+  const [notFound, setNotFound] = useState(!initialPost);
 
   useEffect(() => {
-    getBlogPostBySlug(slug)
-      .then((data) => {
-        if (data) setPost(data);
-        else setNotFound(true);
-      })
-      .catch(() => setNotFound(true));
-  }, [slug]);
-
-  useEffect(() => {
-    if (post) document.title = `${post.title} — NEWEN`;
-  }, [post]);
+    if (!initialPost) {
+      getBlogPostBySlug(slug)
+        .then((data) => {
+          if (data) setPost(data);
+          else setNotFound(true);
+        })
+        .catch(() => setNotFound(true));
+    }
+  }, [slug, initialPost]);
 
   return (
     <div className="min-h-screen bg-background">
