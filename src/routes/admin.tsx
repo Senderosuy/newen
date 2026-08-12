@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 import {
   LayoutDashboard,
   Images,
@@ -35,6 +36,7 @@ function AdminLayout() {
   const navigate = useNavigate();
   // undefined = cargando, null = sin sesión
   const [session, setSession] = useState<Session | null | undefined>(undefined);
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setSession(data.session));
@@ -43,16 +45,38 @@ function AdminLayout() {
   }, []);
 
   useEffect(() => {
-    if (session === null) navigate({ to: "/login" });
+    if (session === null) {
+      navigate({ to: "/login" });
+    } else if (session) {
+      // Verificar si el usuario tiene rol de admin en la base de datos
+      supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", session.user.id)
+        .eq("role", "admin")
+        .single()
+        .then(({ data, error }) => {
+          if (error || !data) {
+            console.error("Acceso denegado: no es administrador", error);
+            setIsAdmin(false);
+            toast.error("No tienes permisos de administrador.");
+            supabase.auth.signOut().then(() => navigate({ to: "/" }));
+          } else {
+            setIsAdmin(true);
+          }
+        });
+    }
   }, [session, navigate]);
 
-  if (!session) {
+  if (session === undefined || isAdmin === null) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-muted/30">
-        <p className="text-muted-foreground animate-pulse">Verificando sesión...</p>
+        <p className="text-muted-foreground animate-pulse text-sm">Verificando credenciales...</p>
       </div>
     );
   }
+
+  if (!session || !isAdmin) return null;
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
