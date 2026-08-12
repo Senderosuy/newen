@@ -115,11 +115,11 @@ export function Fleet() {
                             key={img + i}
                             onClick={() => setLightbox({ images, index: i + 1, name: vehicle.name })}
                             className="relative aspect-video rounded-xl overflow-hidden bg-muted cursor-zoom-in group/thumb"
-                            aria-label={`Foto ${i + 2} de ${vehicle.name}`}
+                            aria-label={`Ver foto ${i + 2} de ${vehicle.name}`}
                           >
                             <img
                               src={img}
-                              alt=""
+                              alt={`Detalle de ${vehicle.name} — imagen ${i + 2}`}
                               loading="lazy"
                               className="w-full h-full object-cover group-hover/thumb:scale-110 transition-transform duration-300"
                             />
