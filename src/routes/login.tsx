@@ -8,7 +8,11 @@ import { toast } from "sonner";
 import logoLight from "@/assets/logo-light.asset.json";
 
 // Solo estos emails pueden crear la cuenta admin la primera vez (no hay registro público).
-const ALLOWED_ADMIN_EMAILS = ["cristian+newen@senderosgroup.com", "cristian@senderosgroup.com"];
+const ALLOWED_ADMIN_EMAILS = [
+  "cristian+newen@senderosgroup.com",
+  "cristian@senderosgroup.com",
+  "newentours@gmail.com",
+];
 
 export const Route = createFileRoute("/login")({
   component: LoginPage,
