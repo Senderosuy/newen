@@ -10,7 +10,7 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { getSiteSettings } from "@/lib/queries";
 import type { SiteSettings } from "@/types";
-import ogImageAsset from "@/assets/og-image.asset.json";
+const ogImageUrl = "https://mknhcciovwphpzeeetjt.supabase.co/storage/v1/object/public/site-photos/og-image-newen.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -23,11 +23,11 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "https://newen.com.uy" },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "es_UY" },
-      { property: "og:image", content: ogImageAsset.url },
+      { property: "og:image", content: ogImageUrl },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "NEWEN — Transporte de Pasajeros en Uruguay" },
       { name: "twitter:description", content: "Traslados ejecutivos y turismo premium en Uruguay." },
-      { name: "twitter:image", content: ogImageAsset.url },
+      { name: "twitter:image", content: ogImageUrl },
     ],
     links: [
       { rel: "canonical", href: "https://newen.com.uy" }
@@ -52,7 +52,7 @@ function Index() {
     "provider": {
       "@type": "LocalBusiness",
       "name": "NEWEN",
-      "image": ogImageAsset.url,
+      "image": ogImageUrl,
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "UY"
