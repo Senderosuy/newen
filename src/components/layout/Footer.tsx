@@ -49,7 +49,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
       </div>
       
       <div className="max-w-7xl mx-auto pt-16 mt-16 border-t border-white/10 text-center text-white/60 text-xs">
-        <p>© {new Date().getFullYear()} NEWEN. Todos los derechos reservados. Desarrollado por <a href="https://latamnova.io" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors underline decoration-white/20 underline-offset-2">LatamNova Group System SAS</a>.</p>
+        <p>© {new Date().getFullYear()} NEWEN. Todos los derechos reservados. Desarrollado por <a href="https://latamnova.app/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors underline decoration-white/20 underline-offset-2">LatamNova Group System SAS</a>.</p>
       </div>
     </footer>
   )
